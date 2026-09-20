@@ -1,0 +1,13 @@
+{
+    "Lua.diagnostics.disable": [
+        "lowercase-global",
+    ],
+    "Lua.diagnostics.globals": [
+        "love"
+    ],
+    "cSpell.words": [
+        "funcname",
+        "istouch",
+        "mousereleased"
+    ]
+}

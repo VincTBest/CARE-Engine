@@ -1,0 +1,12 @@
+{
+    "version": "1.0.0",
+    "title": "Cirkl",
+    "desc": "Cirkl is a demo game for CARE",
+    "dirs": {
+        "scripts": "scripts",
+        "images" : "images",
+        "fonts"  : "fonts",
+        "text"   : "text"
+    },
+    "mainScript": "main.lua"
+}
