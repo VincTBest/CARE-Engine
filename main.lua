@@ -1,6 +1,10 @@
 -- CARE Engine:  A data-driven Love2D game engine.
 require("util.all")
 
+function getCareCredits()
+    return CARE_CREDITS
+end
+
 dataKeys = {}
 data = {}
 function addData(name, value) data[name] = value table.insert(dataKeys, name) end

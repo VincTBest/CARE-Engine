@@ -25,6 +25,7 @@ end
 
 function sRun()
     print("Run!")
+    print(getCareCredits())
 end
 
 local cx, cy = 0, 0

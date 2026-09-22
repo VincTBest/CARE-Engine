@@ -16,8 +16,8 @@ function readTexts(lang)
     local gLang = readTextFile("global")
     local langs = table.merge({rLang, gLang})
     textLib = langs
-    table.print(textLib)
-    print(getTKey("MENU_CONTINUE"))
+    --table.print(textLib)
+    --print(getTKey("MENU_CONTINUE"))
 end
 
 function readTextFile(name)
@@ -25,7 +25,7 @@ function readTextFile(name)
     local textLines = love.filesystem.lines("project/"..textFolder.."/"..name..".str")
 
     local lang = name
-    local table = {}
+    local langKeys = {}
 
     local i = 1
     for l in textLines do
@@ -47,10 +47,15 @@ function readTextFile(name)
             value = value:rstrip("\"")
             --print("'"..value.."'")
 
-            print("'"..key.."'"..": ".."'"..value.."'")
+            --print("'"..key.."'"..": ".."'"..value.."'")
+            langKeys[key] = value
 
         end
         i=i+1
     end
-    return table, lang
+
+    --print(lang.." table: ")
+    --table.print(langKeys)
+
+    return langKeys, lang
 end

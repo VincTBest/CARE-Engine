@@ -1,4 +1,13 @@
 
+
+local doPrint = false
+function setDPrint(to) doPrint = to end
+function getDPrint() return doPrint end
+
+function dprint(...)
+    if doPrint then print(...) end
+end
+
 function table.print(t, depth, keys)
     depth = depth or 8
     keys  = keys or {}
@@ -17,6 +26,7 @@ end
 
 function createKeyPres(keys)
     local s = ""
+    
     for i=1,#keys do s = s..keys[i]..": " end
     return s
 end
