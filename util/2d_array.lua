@@ -42,7 +42,7 @@ function create2DArray(w, h, defaultEl)
     return array
 end
 
-local ARITH = {
+ARITH = {
     ADD = function(o, v) return o+v end,
     SUB = function(o, v) return o-v end,
     MUL = function(o, v) return o*v end,
