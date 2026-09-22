@@ -9,10 +9,10 @@ function create2DArray(w, h, defaultEl)
         h = h,
     }
 
-    for i = 1, h do
+    for _i = 1, h do
         local row = {}
-        for j = i, w do
-            table.insert(row, { defaultEl })
+        for _j = 1, w do
+            table.insert(row, defaultEl)
         end
         table.insert(array.data, row)
     end
