@@ -1,7 +1,7 @@
 
 function create2DArray(w, h, defaultEl)
     -- Basically userdata from Picotron.
-    defaultEl = defaultEl or 0
+    if defaultEl == nil then defaultEl = 0 end
 
     local array = {
         data = {},
