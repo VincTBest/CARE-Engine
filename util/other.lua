@@ -26,7 +26,7 @@ end
 
 function createKeyPres(keys)
     local s = ""
-    
+
     for i=1,#keys do s = s..keys[i]..": " end
     return s
 end
@@ -101,7 +101,7 @@ end
 --         sep = "%s"
 --     end
 --     local t = {}
-    
+
 --     for str in string.gmatch(inputStr, "([^"..sep.."]+)") do
 --         table.insert(t, str)
 --     end
@@ -111,3 +111,25 @@ end
 -- function string.trim(s)
 --     return s:gsub("^%s*(.-)%s*$", "%1")
 -- end
+
+function joinPath(...)
+    local args = {...}
+    local parts = {}
+
+    for i, part in ipairs(args) do
+        local str = tostr(part)
+
+        if i > 1 then
+            str = str:gsub("^([/\\]+)", "")
+        end
+        if i < #args then
+            str = str:gsub("([/\\]+)$", "")
+        end
+
+        if str ~= "" then
+            table.insert(parts, str)
+        end
+    end
+
+    return table.concat(parts, "/")
+end
