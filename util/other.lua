@@ -133,3 +133,12 @@ function joinPath(...)
 
     return table.concat(parts, "/")
 end
+
+function normalizePath(path)
+    local old_path
+    repeat
+        old_path = path
+        path = path:gsub("[^/]+%/%.%.%/", "")
+    until old_path == path
+    return path
+end
