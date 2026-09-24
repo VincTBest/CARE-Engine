@@ -6,9 +6,10 @@
         "scripts": "scripts",
         "images" : "images",
         "fonts"  : "fonts",
-        "text"   : "strings"
+        "text"   : "strings",
+        "maps"   : "maps"
     },
     "mainScript": "main.lua",
-    "defaultLang": "EN-US.str",
-    "globalLang":  "global.str"
+    "defaultLang": "EN-US",
+    "globalLang":  "global"
 }
