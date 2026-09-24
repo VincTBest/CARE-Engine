@@ -57,8 +57,10 @@ function runScript(filename)
     table.insert(activeScripts, environment)
 end
 
+--local mapD
+
 function love.load()
-    print("CARE Engine")
+    print("CARE Engine Version "..CARE_VERSION)
 
     -- local l = createColliderLayer()
     -- createCollider(l, "square", 250, 100, 110, 140)
@@ -70,9 +72,18 @@ function love.load()
     local project_meta = json.decode(project_meta_json)
     addData("projectMeta", project_meta)
 
-    print("Loading texts...")
+    print("Loading tilesets...")
 
-    readTexts("EN-US")
+    loadTiledTilesets()
+
+    print("Loading maps...")
+
+    local mapN = loadTiledMap("untitled")
+    --mapD = createTilemap(MAPS[mapN])
+
+    print("Loading strings...")
+
+    readTexts(getData("projectMeta")["defaultLang"])
 
     print("Loading scripts...")
     loadScripts()
@@ -108,6 +119,9 @@ function love.draw()
     clear()
 
     forFuncInScripts("sDraw")
+
+    --clear(1,1,1,1)
+    --mapD.draw()
 end
 
 function love.mousepressed( x, y, button, istouch, presses )

@@ -3,6 +3,7 @@ print("Hello from script")
 local demoImage
 local wikiImage
 local demoFont
+local demoMap
 
 local mx, my = 0, 0 -- Mouse Coords
 local ww, wh = 0, 0 -- Window W/H
@@ -21,6 +22,7 @@ function sLoad()
     demoImage = loadImage("O.png")
     wikiImage = loadImage("wiki.png")
     demoFont = loadFonts("NotoSans-Regular.ttf")
+    demoMap = createTilemap(MAPS["untitled"])
 end
 
 function sRun()
@@ -33,6 +35,11 @@ local cx, cy = 0, 0
 function sDraw()
 
     clear(sine, sine, sine, 1)
+
+    -- Draw Map
+    setColor(1, 1, 1, 1)
+
+    demoMap.draw()
 
     setColor(1, 0, 0, .1)
 
