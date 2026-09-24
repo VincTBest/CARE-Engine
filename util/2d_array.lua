@@ -1,7 +1,7 @@
 
 function create2DArray(w, h, defaultEl)
     -- Basically userdata from Picotron.
-    if defaultEl == nil then defaultEl = 0 end
+    defaultEl = defaultEl or 0
 
     local array = {
         data = {},
@@ -9,16 +9,26 @@ function create2DArray(w, h, defaultEl)
         h = h,
     }
 
-    for _i = 1, h do
+    for _ = 1, h do
         local row = {}
-        for _j = 1, w do
+        for _ = 1, w do
             table.insert(row, defaultEl)
         end
         table.insert(array.data, row)
     end
+    --print("-------------:>")
+    --print(type(array.data))
+    --print(type(array.data[1]))
+    --table.print(array.data)
+    --print("-------------<:")
 
     function array.get(x, y)
         local el = array.data[y][x]
+        --print("get:>")
+        --table.print(array.data)
+        --print(json.encode(array.data))
+        --print(type(array.data))
+        --print("Getting: "..tostr(x).."-"..tostr(y).."... ("..tostr(el)..")")
         return el
     end
 
@@ -36,7 +46,7 @@ function create2DArray(w, h, defaultEl)
     end
 
     function array.arith(exp, v)
-        array.forEach(function(ov, _x, _y) return exp(ov, v) end)
+        array.forEach(function(ov, _, _) return exp(ov, v) end)
     end
 
     return array
