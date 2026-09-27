@@ -110,6 +110,8 @@ function forFuncInScripts(funcname, ...)
 end
 
 function love.update(dt)
+    updateDefaultCanvas()
+
     forFuncInScripts("sUpdate", dt)
 
     --print(love.timer.getFPS())
@@ -120,6 +122,10 @@ function love.draw()
 
     forFuncInScripts("sDraw")
 
+    --drawDefaultCanvas(0, 0)
+
+    setColor(1,1,1,1)
+    love.graphics.print("FPS: "..tostr(love.timer.getFPS()))
     --clear(1,1,1,1)
     --mapD.draw()
 end
