@@ -1,7 +1,7 @@
 {
     "version": "1.0.0",
-    "title": "Cirkl",
-    "desc": "Cirkl is a demo game for CARE",
+    "title": "CARE Demo",
+    "desc": "An demo to showcase CARE features.",
     "dirs": {
         "scripts": "scripts",
         "images" : "images",
