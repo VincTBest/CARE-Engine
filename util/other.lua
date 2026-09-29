@@ -142,3 +142,7 @@ function normalizePath(path)
     until old_path == path
     return path
 end
+
+function string.startswith(str1, str2)
+    return str1:sub(1,#str2) == str2
+end
