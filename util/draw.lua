@@ -45,12 +45,16 @@ end
 -- Font / Text
 
 function setFont(font, size)
+    love.graphics.setFont(getFontObj(font, size))
+end
+
+function getFontObj(font, size)
     size = tostr(size)
     if not table.containsK(font, size) then
         error("Font does not have size "..size.."!\n")
         return
     end
-    love.graphics.setFont(font[size])
+    return font[size]
 end
 
 function text(text, x, y, ...)
@@ -170,7 +174,7 @@ FONTSIZES_REDUCED = {8, 12, 18, 24, 30, 36, 44, 50, 64}
 FONTSIZES_INCREASED = {2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 62, 64}
 
 function loadFonts(path, sizes)
-    path = "project/"..getData("projectMeta")["dirs"]["fonts"].."/"..path
+    path = normalizePath(joinPath("project/"..getData("projectMeta")["dirs"]["fonts"], path))
     sizes = sizes or FONTSIZES_REGULAR
 
     print("Loading font: "..path)
