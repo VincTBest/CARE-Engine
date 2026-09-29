@@ -45,7 +45,14 @@ end
 -- Font / Text
 
 function setFont(font, size)
-    love.graphics.setFont(getFontObj(font, size))
+    local fontObj
+    if size then
+        fontObj = getFontObj(font, size)
+    else
+        fontObj = font
+    end
+
+    love.graphics.setFont(fontObj)
 end
 
 function getFontObj(font, size)
