@@ -56,12 +56,57 @@ end
 
 function table.merge(tables)
     local merged = tables[1]
-    for i=2,#tables do
+    for i = 2, #tables do
         for k, v in pairs(tables[i]) do
             merged[k] = v
         end
     end
     return merged
+end
+
+function table.clone(tbl)
+    return {table.unpack(tbl)}
+end
+
+function table.copy(tbl)
+    local new = {}
+
+    for _, v in ipairs(tbl) do
+        table.insert(new, v)
+    end
+
+    return new
+end
+
+function table.deepcopy(orig, copies)
+    copies = copies or {}
+    local orig_type = type(orig)
+    local copy
+    if orig_type == 'table' then
+        if copies[orig] then
+            copy = copies[orig]
+        else
+            copy = {}
+            copies[orig] = copy
+            for orig_key, orig_value in next, orig, nil do
+                copy[table.deepcopy(orig_key, copies)] = table.deepcopy(orig_value, copies)
+            end
+            setmetatable(copy, table.deepcopy(getmetatable(orig), copies))
+        end
+    else -- number, string, boolean, etc
+        copy = orig
+    end
+    return copy
+end
+
+function table.copyK(tbl)
+    local new = {}
+
+    for k, v in pairs(tbl) do
+        new[k] = v
+    end
+
+    return new
 end
 
 -- function rCol(pattern, precision)
@@ -144,5 +189,85 @@ function normalizePath(path)
 end
 
 function string.startswith(str1, str2)
-    return str1:sub(1,#str2) == str2
+    return str1:sub(1, #str2) == str2
+end
+
+function table.getBiggest(tbl)
+	local biggest, biggest_key = nil, nil
+
+	for k, v in pairs(tbl) do
+		if type(v) == "number" and (biggest == nil or v > biggest) then
+			biggest, biggest_key = v, k
+		end
+	end
+
+	return biggest, biggest_key
+end
+
+function Vec2(p1, p2, p3)
+    if p3 then
+        if type(p1) == "table" then
+            if type(p2) == "number" and type(p3) == "number" then
+                p1.x, p1.y = p2, p3
+                return p1
+            else
+                error("A Vec2's x and y must be numbers")
+            end
+        else
+            error("A Vec2's x and y must be numbers")
+        end
+    else
+        if type(p1) == "number" and type(p2) == "number" then
+            return {x=p1, y=p2}
+        else
+            error("A Vec2's x and y must be numbers")
+        end
+    end
+end
+
+function Vec3(x, y, z)
+    return {x=x, y=y, z=z}
+end
+
+function Vec4(x, y, z, w)
+    return {x=x, y=y, z=z, w=w}
+end
+
+function Vec5(x, y, z, w, v)
+    return { x = x, y = y, z = z, w = w, v = v }
+end
+
+function deg_to_rad(deg)
+    return deg * (math.pi / 180)
+end
+
+function rad_to_deg(rad)
+    return rad * (180 / math.pi)
+end
+
+local serrors = {}
+function serror(msg)
+    if not table.contains(serrors, msg) then
+        print("[serror]: " .. tostr(msg))
+        table.insert(serrors, msg)
+    end
+end
+
+function UnixTS()
+    return os.time(os.date("!*t"))
+end
+
+function UnixTSToTime(unix, format)
+    format = format or "%c"
+    return os.date(format, unix)
+end
+
+-- Shortenings
+
+function tostr(v) return tostring(v) end
+function tonum(e)
+    if type(e) == "bool" then
+        return e == true
+    end
+    return tonumber(e)
 end
